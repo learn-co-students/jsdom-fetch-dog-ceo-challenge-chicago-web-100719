@@ -11,6 +11,7 @@ fetch('https://dog.ceo/api/breeds/list/all')
 let ul = document.getElementById("dog-breeds")
 
 
+
 ul.addEventListener('click', colorChange)
 
 function addImages(json) {
