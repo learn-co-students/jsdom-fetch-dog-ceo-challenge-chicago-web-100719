@@ -5,22 +5,22 @@ const breedUrl = 'https://dog.ceo/api/breeds/list/all';
 const dogFilter = document.getElementById("breed-dropdown");
 let dogBreeds = ""
 
-
 fetch(imgUrl)
   .then(response => response.json())
-  .then(dogData => appendDogs(dogData.message));
+  .then(dogData => appendDogs(dogData.message))
+  .catch(err => console.log(err));
 
 fetch(breedUrl)
   .then(response => response.json())
   .then(dogData => dogBreeds = Object.keys(dogData.message))
-  .then(dogData => appendBreeds(dogBreeds));
-
+  .then(dogData => appendBreeds(dogBreeds))
+  .catch(err => console.log(err));
 
 function appendDogs(dogData) {
   for (dogURL of dogData) {
     const dogPic = document.createElement("img");
     dogPic.src = dogURL;
-    dogPic.style = "width: 300px; display: block"
+    dogPic.style = "width: 325px; height: 300px"
     dogContainer.appendChild(dogPic);
   }
 };
@@ -45,7 +45,6 @@ function filterDropDown() {
   const filteredDogsBreeds = dogBreeds.filter(breed => breed[0] === startingLetter)
   appendBreeds(filteredDogsBreeds)
 }
-
 
 
 //EVENT LISTENERS
