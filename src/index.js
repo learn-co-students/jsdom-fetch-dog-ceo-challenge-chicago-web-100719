@@ -13,6 +13,17 @@ let ul = document.getElementById("dog-breeds")
 
 ul.addEventListener('click', colorChange)
 
+const dropdown = document.getElementById('breed-dropdown')
+
+dropdown.addEventListener('change', function(event) {
+    liObject = document.getElementsByTagName('li');
+    liArray = Array.from(liObject);
+    showDogs =  liArray.filter(chosen);
+    hideDogs = liArray.filter(notChosen);
+    showDogs.forEach(dog => dog.style.display = 'block');
+    hideDogs.forEach(dog => dog.style.display = 'none');
+})
+
 function addImages(json) {
     let div = document.querySelector("#dog-image-container")
     json.message.forEach(image => {
@@ -39,5 +50,15 @@ function colorChange(event) {
             event.target.style.color = 'red';
         }
     }
+}
+
+function chosen(dog) {
+    let choice = dropdown.options[dropdown.selectedIndex].value;
+    return dog.innerText[0] == choice;
+}
+
+function notChosen(dog) {
+    let choice = dropdown.options[dropdown.selectedIndex].value;
+    return dog.innerText[0] != choice;
 }
 
