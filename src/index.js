@@ -1,13 +1,25 @@
-console.log('%c HI', 'color: firebrick')
-const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
-const breedUrl = "https://dog.ceo/api/breeds/list/all"
-
 document.addEventListener('DOMContentLoaded', function(){
-  const drop = document.getElementById("breed-dropdown")
-  const breedContainer = document.getElementById("dog-breeds")
-
+  renderDogImages()
+  renderDogBreeds()
   addMenuItems()
+})
 
+function renderDogImages(){
+  fetch("https://dog.ceo/api/breeds/image/random/4")
+  .then(resp => resp.json())
+  .then(json => addImages(json.message))
+}
+function renderDogBreeds(){
+  const breedContainer = document.getElementById("dog-breeds")
+  const drop = document.getElementById("breed-dropdown")
+  let breeds
+  
+  fetch("https://dog.ceo/api/breeds/list/all")
+  .then(resp => resp.json())
+  .then(json => {
+    breeds = Object.keys(json.message)
+    addBreeds(Object.keys(json.message))
+  })
   breedContainer.addEventListener("click", function(event) {
     event.target.style.color = "green"
   })
@@ -20,26 +32,9 @@ document.addEventListener('DOMContentLoaded', function(){
     else {
       newBreeds = breeds.filter(breed => breed[0] === event.target.value)
     }
-
     addBreeds(newBreeds)
   })
-
-
-  fetch(imgUrl)
-  .then(resp => resp.json())
-  .then(json => addImages(json.message))
-
-  let breeds
-  
-  fetch(breedUrl)
-  .then(resp => resp.json())
-  .then(json => {
-    breeds = Object.keys(json.message)
-    addBreeds(breeds)
-  })
-
-
-})
+}
 
 function addImages(json) {
   json.forEach(imageURL => addImage(imageURL))
