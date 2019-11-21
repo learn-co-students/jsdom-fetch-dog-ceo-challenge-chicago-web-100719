@@ -1,4 +1,4 @@
-console.log('%c HI', 'color: firebrick')
+
 console.log('%c HI', 'color: firebrick')
 const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
 const breedUrl = "https://dog.ceo/api/breeds/list/all"
@@ -37,9 +37,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
     addBreeds(newBreeds)
   })
-
-
-
 })
 
 function addImages(json) {
@@ -64,16 +61,6 @@ function addBreed(dogBreed) {
   li.innerText = dogBreed
   breedContainer.appendChild(li)
 }
-
-function filterBreeds(breeds, event) {
-  if (event.target.value === 'all') { 
-    let breeds = breeds.then(breed => addBreeds(Object.keys(breed.message)))
-  }
-  else {
-    let breeds = breeds.filter(breed => breed[0] === event.target.value)
-  }
-}
-
 
 function addMenuItems(){
   "abcdefghijklmnopqrstuvwxyz".split('').forEach(letter => addMenuItem(letter))
