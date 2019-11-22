@@ -31,7 +31,7 @@ function renderBreeds() {
 
   breedFilter.addEventListener("change", function(event){
     let newBreeds
-    
+
     if (event.target.value === 'all') { 
       newBreeds = breeds
     }
@@ -56,7 +56,7 @@ function addImg(imgURL) {
 }
 
 function addBreeds(breeds) {
-  document.getElementById("dog-breeds").innerHTML = ""
+  breedList.innerHTML = ""
   breeds.forEach(breed => addBreed(breed))
 }
 
